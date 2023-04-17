@@ -59,28 +59,13 @@ Can you invent a way to make it easier for them using what you've learned about 
 
 Try making a page appear at the URL `/add`. Add a form to it that takes users to `/wizard_add` with the appropriate query string on the end.
 
-## Using APIs within actions
-
-Some handy links:
-
- - [JSONView Chrome extension](https://chrome.google.com/webstore/detail/jsonview/chklaanhfefbnpoihckbnefhakgolnmc?hl=en)
- - [Dark Sky forecast at the Merchandise Mart for humans](https://darksky.net/forecast/41.8887,-87.6355/us12/en)
- - Dark Sky forecast at the Merchandise Mart for machines:
- 
-     ```
-     https://api.darksky.net/forecast/REPLACE_THIS_PATH_SEGMENT_WITH_YOUR_API_TOKEN/41.8887,-87.6355
-     ```
- - [Dark Sky API docs](https://darksky.net/dev/docs)
- - [Map of Merchandise Mart for humans](https://goo.gl/maps/2mXdvBnHSGuMq98m6)
- - Map of Merchandise Mart for machines:
-
-    ```
-    https://maps.googleapis.com/maps/api/geocode/json?address=Merchandise%20Mart%20Chicago&key=REPLACE_THIS_QUERY_STRING_PARAMETER_WITH_YOUR_API_TOKEN
-    ```
- - [Google Geocoding API docs](https://developers.google.com/maps/documentation/geocoding/start)
- - [How to store secrets securely on Gitpod](https://chapters.firstdraft.com/chapters/792)
-
 ## Your tasks
+
+### Required
+
+- Build out the add, subtract, multiply, and divide RCAVs.
+
+### Optional
 
  - **Street to Coordinates:** Figure out how to turn an arbitrary street address (find a place that is [sort of rainy](https://www.rainviewer.com/) right now to test with) into a latitude/longitude using the Geocoding API.
  - **Coordinates to weather:** Figure out how to turn a latitude/longitude pair into a weather forecast using the Dark Sky API Show the information displayed in the target:
@@ -89,19 +74,7 @@ Some handy links:
     - Outlooks for next sixy minutes, several hours, several days
  - **Street to Weather:** Put the above two together — given an arbitrary street address, display the forecast.
 
-## Stretch goal
-   
-   - Stretch goal: check whether there is a >50% chance of precipitation at any point during the next 12 hours. If so, we will print "You should take an umbrella!"
-   - Explore [the API documentation](https://darksky.net/dev/docs#forecast-request) to see what information is available to help you check this.
-   - Something that might or might not be useful: [the `Time.at` method](https://apidock.com/ruby/Time/at/class).
-
-        (Humans have [many, many different ways of representing dates](https://en.wikipedia.org/wiki/List_of_calendars). For the purposes of different pieces of software being able to agree on dates and times, most systems when talking to each other use [Epoch time](https://en.wikipedia.org/wiki/Unix_time) notation, or the number of seconds that have passed since midnight UTC on January 1st (minus leap seconds). Dark Sky, for example, includes times in this format. You can use `Time.at()` to convert to something more familiar, if you want to.)
- - Put all of the pieces together; given an arbitrary address:
-    - print the current temperature
-    - print outlook for the next hour
-    - print whether a person should carry an umbrella.
-
-## Using gems to interact with APIs
+## Optional stretch goals
 
 Interacting with APIs can be easier if someone has written a Ruby library (or "gem") with methods that already know the URLs, parse the JSON, and return exactly the values we want.
 
@@ -120,6 +93,51 @@ See [this Chapter for a guide to sending text messages via the Twilio API](https
 ### Stretch goal
 
 **Make your app behave like the target!** Accept some text from the user, ask for a target language, translate the text, and SMS it to a phone number.
+
+## Useful links
+
+Some handy links:
+
+ - [Hoppscotch](https://hoppscotch.io/): a great, free, online tool that makes it easy to experiment with API calls and see the JSON reponses nicely formatted.
+ - [How to store secrets securely on Gitpod](https://chapters.firstdraft.com/chapters/792)
+
+### Pirate Weather links
+
+ - [Pirate Wather forecast at the Merchandise Mart for humans](https://merrysky.net/forecast/merchandise%20mart/us)
+ - Pirate Weather forecast at the Merchandise Mart for machines:
+ 
+     ```
+     https://api.pirateweather.net/forecast/REPLACE_THIS_PATH_SEGMENT_WITH_YOUR_API_TOKEN/41.8887,-87.6355
+     ```
+
+     **You'll need an access token to view this page. Find it in the assignment on Canvas.**
+ - [Pirate Weather API docs](https://docs.pirateweather.net/en/latest/Specification/)
+ 
+### Google Maps links
+
+ - [Map of Merchandise Mart for humans](https://goo.gl/maps/2mXdvBnHSGuMq98m6)
+ - Map of Merchandise Mart for machines:
+
+    ```
+    https://maps.googleapis.com/maps/api/geocode/json?address=Merchandise%20Mart%20Chicago&key=REPLACE_THIS_QUERY_STRING_PARAMETER_WITH_YOUR_API_TOKEN
+    ```
+
+    **You'll need an access token to view this page. Find it in the assignment on Canvas.**
+ - [Google Geocoding API docs](https://developers.google.com/maps/documentation/geocoding/start)
+
+## Useful methods
+
+Most of working with APIs boils down to working with [`Array`s](https://chapters.firstdraft.com/chapters/758) and [`Hash`es](https://chapters.firstdraft.com/chapters/767).
+
+You will likely also need to use [`if` statements](https://chapters.firstdraft.com/) and [loops](https://chapters.firstdraft.com/chapters/764) (most useful programs do).
+
+Here are some less familiar methods that will be useful:
+
+- `URI.open()`: The argument to `URI.open` should be a `String` containing a URL. The method will then read the page at the provided URL and return it as a `StringIO` object.
+    - In order to use this method, we must `require "open-uri"`.
+- `StringIO#read`: If you call `.read` on an instance of `Tempfile`, it will return the contents of the file as a `String`.
+- `JSON.parse()`: The argument to `JSON.parse` should be a `String` containing valid JSON. The method will transform the JSON objects into Ruby objects.
+    - In order to use this method, we must `require "json"`.
 
 ## Specs
 <details>
