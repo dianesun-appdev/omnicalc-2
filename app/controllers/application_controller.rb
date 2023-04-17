@@ -40,8 +40,8 @@ class ApplicationController < ActionController::Base
   end
 
   def wizard_divide
-    @first_num = params[:first_num]
-    @second_num = params[:second_num]
+    @first_num = params[:first_num].to_f
+    @second_num = params[:second_num].to_f
     @result = @first_num / @second_num
 
     render({ :template => "calculator/results_divide.html.erb" })
